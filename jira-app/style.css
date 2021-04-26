@@ -189,3 +189,11 @@
 .fa-trash-alt{
     margin-right: 1rem;
 }
+.search-bar{
+    font-size: 26px;
+    text-align: center;
+    margin-left: 36rem;
+    border-radius: 11px;
+    outline: none;
+}
+

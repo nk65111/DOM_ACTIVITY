@@ -212,3 +212,34 @@ function toggleTicketFilter(e){
     }
     localStorage.setItem("AllItem",JSON.stringify(AllItem));
 }
+
+function SearchByID(){
+    let SearchId=document.querySelector("#searchId");
+    let SearchValue=SearchId.value.toUpperCase();
+    let AllItem=JSON.parse(localStorage.getItem("AllItem"));
+    let FilterBySearch=AllItem.filter(function(filterObject){
+        if(filterObject.ticketid.toUpperCase().includes(SearchValue)){
+            return true;
+        }
+    });
+    
+ TicketContainer.innerHTML="";
+
+ for(let i=0;i<FilterBySearch.length;i++){
+    let {ticketFilter,ticketid,ticketContent}= FilterBySearch[i];
+    let TicketDiv=document.createElement("div");
+    TicketDiv.classList.add("ticket");
+    TicketDiv.innerHTML=` <div class="ticket-filter ${ticketFilter}"></div>
+    <div class="ticket-info">
+    <div class="ticket-id">#${ticketid}</div>
+    <div class="delete-ticket">
+    <i class="far fa-trash-alt" id=${ticketid}></i>
+    </div>
+    </div>
+    <div class="ticket-content">${ticketContent}</div>`
+    TicketContainer.append(TicketDiv);
+    TicketDiv.querySelector(".delete-ticket i").addEventListener("click",deleteTicket);
+    TicketDiv.querySelector(".ticket-filter").addEventListener("click",toggleTicketFilter);
+ }
+
+}
